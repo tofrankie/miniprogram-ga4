@@ -6,7 +6,7 @@
 
 # Interface: MiniprogramRequestOptions
 
-Defined in: [core/types.ts:1](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L1)
+Defined in: [core/types.ts:1](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L1)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [core/types.ts:1](https://github.com/tofrankie/miniprogram-ga4/blob/
 
 > `optional` **complete**: () => `void`
 
-Defined in: [core/types.ts:15](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L15)
+Defined in: [core/types.ts:15](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L15)
 
 请求完成回调
 
@@ -28,7 +28,7 @@ Defined in: [core/types.ts:15](https://github.com/tofrankie/miniprogram-ga4/blob
 
 > `optional` **data**: `string`
 
-Defined in: [core/types.ts:7](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L7)
+Defined in: [core/types.ts:7](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L7)
 
 序列化后的请求体
 
@@ -38,7 +38,7 @@ Defined in: [core/types.ts:7](https://github.com/tofrankie/miniprogram-ga4/blob/
 
 > `optional` **fail**: (`err`) => `void`
 
-Defined in: [core/types.ts:13](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L13)
+Defined in: [core/types.ts:13](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L13)
 
 请求失败回调
 
@@ -58,7 +58,7 @@ Defined in: [core/types.ts:13](https://github.com/tofrankie/miniprogram-ga4/blob
 
 > `optional` **header**: `Record`\<`string`, `string`\>
 
-Defined in: [core/types.ts:9](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L9)
+Defined in: [core/types.ts:9](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L9)
 
 请求头
 
@@ -68,7 +68,7 @@ Defined in: [core/types.ts:9](https://github.com/tofrankie/miniprogram-ga4/blob/
 
 > **method**: `string`
 
-Defined in: [core/types.ts:5](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L5)
+Defined in: [core/types.ts:5](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L5)
 
 HTTP 方法，当前库固定为 POST
 
@@ -78,7 +78,7 @@ HTTP 方法，当前库固定为 POST
 
 > `optional` **success**: () => `void`
 
-Defined in: [core/types.ts:11](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L11)
+Defined in: [core/types.ts:11](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L11)
 
 请求成功回调
 
@@ -92,6 +92,6 @@ Defined in: [core/types.ts:11](https://github.com/tofrankie/miniprogram-ga4/blob
 
 > **url**: `string`
 
-Defined in: [core/types.ts:3](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L3)
+Defined in: [core/types.ts:3](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L3)
 
 请求地址

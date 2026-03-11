@@ -8,7 +8,7 @@
 
 > **ViewItemEventParams** = `object` & [`CurrencyValueParams`](CurrencyValueParams.md) & [`EventParams`](EventParams.md)
 
-Defined in: [core/types.ts:152](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L152)
+Defined in: [core/types.ts:152](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L152)
 
 `view_item` 事件参数
 

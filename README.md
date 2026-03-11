@@ -120,11 +120,24 @@ ga.pageView('首页', 'pages/index/index') // 指定路径
 ga.pageView('设置页', 'pages/setting/setting', 'pages/mine/mine') // 指定当前路径以及来源路径
 ```
 
-对于页面浏览事件，我们可以通过一些 Hack 方式自动上报。比如，原生微信小程序可以考虑使用未提及的 `wx.onAppRoute` 事件，它可以捕获到 Navigation API 或手势操作等引起的路由变化，从而上报页面浏览事件。示例：
+对于页面浏览事件，我们可以通过一些 Hack 方式自动上报。比如，原生微信小程序可以考虑使用文档中未提及但实际可用的 `wx.onAppRoute` 事件，它可以捕获到 Navigation API 或手势操作等引起的路由变化，从而上报页面浏览事件。**由于 `wx.onAppRoute` 为非公开 API，不排除后续版本会移除，请谨慎使用，后果自负！**。
+
+示例：
 
 ```js
-wx.onAppRoute(res => {
-  console.log(res)
+// app.js
+import ga from '@tofrankie/miniprogram-ga4'
+
+App({
+  onLaunch() {
+    ga.config('xxx', 'xxx')
+
+    wx.onAppRoute(res => {
+      const pagePath = res.path
+      const pageTitle = res.page.window?.navigationBarTitleText ?? pagePath
+      ga.pageView(pageTitle, pagePath)
+    })
+  },
 })
 ```
 

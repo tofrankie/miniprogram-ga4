@@ -33,7 +33,7 @@ export function createSender(options: CreateSenderOptions): EventSender {
 
     const payload: {
       client_id: string
-      events: Array<{ name: string, params: Record<string, unknown> }>
+      events: Array<{ name: string; params: Record<string, unknown> }>
     } = {
       client_id: options.getClientId(),
       events: [],

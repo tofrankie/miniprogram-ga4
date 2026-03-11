@@ -6,7 +6,7 @@
 
 # Interface: PromotionEventParams
 
-Defined in: [core/types.ts:135](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L135)
+Defined in: [core/types.ts:135](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L135)
 
 `view_promotion` / `select_promotion` 事件参数
 
@@ -24,7 +24,7 @@ Defined in: [core/types.ts:135](https://github.com/tofrankie/miniprogram-ga4/blo
 
 > `optional` **creative\_name**: `string`
 
-Defined in: [core/types.ts:139](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L139)
+Defined in: [core/types.ts:139](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L139)
 
 促销广告素材名称
 
@@ -34,7 +34,7 @@ Defined in: [core/types.ts:139](https://github.com/tofrankie/miniprogram-ga4/blo
 
 > `optional` **creative\_slot**: `string`
 
-Defined in: [core/types.ts:141](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L141)
+Defined in: [core/types.ts:141](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L141)
 
 促销广告位名称
 
@@ -44,7 +44,7 @@ Defined in: [core/types.ts:141](https://github.com/tofrankie/miniprogram-ga4/blo
 
 > **items**: [`Item`](Item.md)[]
 
-Defined in: [core/types.ts:137](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L137)
+Defined in: [core/types.ts:137](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L137)
 
 与事件相关的商品列表
 
@@ -54,7 +54,7 @@ Defined in: [core/types.ts:137](https://github.com/tofrankie/miniprogram-ga4/blo
 
 > `optional` **promotion\_id**: `string`
 
-Defined in: [core/types.ts:143](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L143)
+Defined in: [core/types.ts:143](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L143)
 
 促销活动 ID
 
@@ -64,6 +64,6 @@ Defined in: [core/types.ts:143](https://github.com/tofrankie/miniprogram-ga4/blo
 
 > `optional` **promotion\_name**: `string`
 
-Defined in: [core/types.ts:145](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L145)
+Defined in: [core/types.ts:145](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L145)
 
 促销活动名称
