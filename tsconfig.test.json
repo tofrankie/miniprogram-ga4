@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "composite": false,
+    "types": ["node", "vitest/globals", "miniprogram-api-typings"],
+    "noEmit": true
+  },
+  "include": ["src/**/*.test.ts"],
+  "exclude": ["node_modules", "dist", "docs"]
+}
