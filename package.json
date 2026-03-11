@@ -1,7 +1,7 @@
 {
   "name": "@tofrankie/miniprogram-ga4",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "packageManager": "pnpm@10.32.0",
   "description": "适用于小程序的 Google Analytics 4",
   "license": "MIT",
@@ -24,7 +24,7 @@
     "import": "./dist/index.mjs",
     "require": "./dist/index.cjs"
   },
-  "main": "dist/index.cjs",
+  "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.mts",
   "files": [
@@ -36,8 +36,10 @@
   },
   "scripts": {
     "dev": "tsdown --watch",
-    "build": "tsdown",
+    "build:tsdown": "tsdown",
+    "build": "run-s build:tsdown copy:cjs-to-js",
     "prepublishOnly": "pnpm build",
+    "copy:cjs-to-js": "node --input-type=module -e \"import { copyFileSync } from 'node:fs'; copyFileSync('dist/index.cjs', 'dist/index.js')\"",
     "lint": "run-s lint:eslint lint:prettier tsc tsc:test lint:publint",
     "lint:eslint": "eslint . --cache --fix",
     "lint:prettier": "prettier . --cache --write --log-level silent",

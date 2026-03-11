@@ -6,7 +6,7 @@
 
 # Interface: ViewItemListEventParams
 
-Defined in: [core/types.ts:122](https://github.com/tofrankie/miniprogram-ga4/blob/44dcc1b6712672d7381e14b8798de264c263c397/src/core/types.ts#L122)
+Defined in: [core/types.ts:122](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L122)
 
 `view_item_list` 事件参数
 
@@ -24,7 +24,7 @@ Defined in: [core/types.ts:122](https://github.com/tofrankie/miniprogram-ga4/blo
 
 > `optional` **item\_list\_id**: `string`
 
-Defined in: [core/types.ts:126](https://github.com/tofrankie/miniprogram-ga4/blob/44dcc1b6712672d7381e14b8798de264c263c397/src/core/types.ts#L126)
+Defined in: [core/types.ts:126](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L126)
 
 商品列表 ID
 
@@ -34,7 +34,7 @@ Defined in: [core/types.ts:126](https://github.com/tofrankie/miniprogram-ga4/blo
 
 > `optional` **item\_list\_name**: `string`
 
-Defined in: [core/types.ts:128](https://github.com/tofrankie/miniprogram-ga4/blob/44dcc1b6712672d7381e14b8798de264c263c397/src/core/types.ts#L128)
+Defined in: [core/types.ts:128](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L128)
 
 商品列表名称
 
@@ -44,6 +44,6 @@ Defined in: [core/types.ts:128](https://github.com/tofrankie/miniprogram-ga4/blo
 
 > **items**: [`Item`](Item.md)[]
 
-Defined in: [core/types.ts:124](https://github.com/tofrankie/miniprogram-ga4/blob/44dcc1b6712672d7381e14b8798de264c263c397/src/core/types.ts#L124)
+Defined in: [core/types.ts:124](https://github.com/tofrankie/miniprogram-ga4/blob/e6b628077df4ffb5f4b4f952d3a4e0884e716f0c/src/core/types.ts#L124)
 
 与事件相关的商品列表

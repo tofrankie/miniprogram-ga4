@@ -1,8 +1,10 @@
 # @tofrankie/miniprogram-ga4
 
-适用于微信小程序的 Google Analytics 4。
+适用于小程序的 Google Analytics 4。目前已支持：
 
-> 理论上支持其他小程序平台，但未经测试验证。
+- 微信小程序
+
+> 理论上支持各小程序平台（包括 uniapp），但未经验证，欢迎反馈！
 
 ## 快速开始
 
@@ -36,11 +38,11 @@ ga.config('your_measurement_id', 'your_api_sceret', {
   // 参考：https://github.com/rchunping/wxapp-google-analytics/issues/4
   transportUrl: 'https://analytics.example.com',
 
-  // 开启调试日志
+  // 开启调试日志，建议仅开发模式下开启
   debug: true,
 
-  // 默认支持微信小程序，通过此选项支持更多小程序（如支付宝、抖音等，但未经测试）
-  // api: my,
+  // 默认为微信小程序，通过此选项可指定其他小程序平台（其他平台未经测试）
+  // api: my, // tt, uni, Taro, ...
 })
 
 // 上报页面浏览事件（体现在 GA 后台的网页和屏幕）
@@ -58,7 +60,7 @@ ga.event('your_event_name', {
 ```
 
 > [!IMPORTANT]
-> 设计事件名称、事件参数之前，请充分了解[事件命名规则](https://support.google.com/analytics/answer/13316687#zippy=web%2C%E7%BD%91%E7%AB%99)，避免使用预留的事件名称、事件参数名称导致后续无法将参数作为自定义维度。
+> 在设计事件名称、事件参数之前，请充分了解[事件命名规则](https://support.google.com/analytics/answer/13316687#zippy=web%2C%E7%BD%91%E7%AB%99)，避免使用 GA 预留的事件名称、事件参数名称导致后续无法将参数设为自定义维度。
 
 ## 关于事件
 
@@ -68,9 +70,10 @@ ga.event('your_event_name', {
 
 鉴于小程序特殊性，需要基于 Measurement Protocol 借助网络请求进行数据上报，**本 SDK 仅实现了部分事件**。
 
-### 固执己见的 event 事件
+### “固执己见”的通用事件
 
-出于实际情况考虑，事件埋点通常是随着业务变化而变化的。多数小程序迭代频率非常高，非常容易产生“过时/废弃”的事件，**因此本 SDK 主张将绝大部分事件归入名为 `event` 的通用事件**。它是一个 opinionated 的事件设计，如果它不满足你的需求，仍然可以通过不同参数形式上报任意事件名称的事件。
+> [!NOTE]
+> 出于实际情况考虑，事件埋点通常是随着业务变化而变化的。多数小程序迭代频率非常高，非常容易产生“过时/废弃”的事件，而且命名是一件非常令人头疼的事情，**因此本 SDK 主张将绝大部分事件归入名为 `event` 的通用事件**。它是一个 opinionated 的事件设计，如果它不满足你的需求，仍然可以通过不同参数形式上报任意事件名称的事件。
 
 ```js
 // 形式（事件名称为 `event`）
@@ -109,11 +112,20 @@ ga.event('any_event_name', {
 
 ```js
 // 形式
-ga.pageView('page title', 'to', 'from')
+ga.pageView('页面标题', '页面路径', '来源页面路径')
 
 // 示例
-ga.pageView('首页', 'pages/index/index')
-ga.pageView('设置页', 'pages/setting/setting', 'pages/mine/mine')
+ga.pageView('首页') // 自动获取当前路径
+ga.pageView('首页', 'pages/index/index') // 指定路径
+ga.pageView('设置页', 'pages/setting/setting', 'pages/mine/mine') // 指定当前路径以及来源路径
+```
+
+对于页面浏览事件，我们可以通过一些 Hack 方式自动上报。比如，原生微信小程序可以考虑使用未提及的 `wx.onAppRoute` 事件，它可以捕获到 Navigation API 或手势操作等引起的路由变化，从而上报页面浏览事件。示例：
+
+```js
+wx.onAppRoute(res => {
+  console.log(res)
+})
 ```
 
 ### 异常事件
@@ -141,7 +153,7 @@ ga.exception('这是一个严重错误', true)
 
 ![](./images/custom-dimension.png)
 
-GA 预留的[自定义参数](https://support.google.com/analytics/answer/13316687#zippy=web%2C%E7%BD%91%E7%AB%99)（用户属性名称）在创建自定义维度时不能使用，比如 `cid`、`uid`、`user_id` 等。因此应该避免使用预留的自定义参数名称，以免日后无法创建筛选项。
+GA 预留的[自定义参数](https://support.google.com/analytics/answer/13316687#zippy=web%2C%E7%BD%91%E7%AB%99)（用户属性名称）在创建自定义维度时不能使用，比如 `cid`、`uid`、`user_id` 等。因此应该避免使用预留的自定义参数名称，以免后续无法将其设为自定义维度，重构字段则会丢失此前的数据。
 
 ## APIs
 

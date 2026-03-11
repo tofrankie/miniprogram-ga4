@@ -16,6 +16,9 @@ export interface EventSender {
   enqueue: (eventName: string, eventParams: Record<string, unknown>) => void
 }
 
+// 事件上报频率
+const EVENT_REPORT_FREQUENCY = 500 // 0.5s
+
 export function createSender(options: CreateSenderOptions): EventSender {
   const eventQueue: QueuedEvent[] = []
   let sending = false
@@ -30,7 +33,7 @@ export function createSender(options: CreateSenderOptions): EventSender {
 
     const payload: {
       client_id: string
-      events: Array<{ name: string; params: Record<string, unknown> }>
+      events: Array<{ name: string, params: Record<string, unknown> }>
     } = {
       client_id: options.getClientId(),
       events: [],
@@ -46,7 +49,7 @@ export function createSender(options: CreateSenderOptions): EventSender {
       eventQueue.shift()
     }
 
-    options.log(`The following events will be sent: \n${JSON.stringify(payload.events, null, 2)}`)
+    options.log(`即将发送的事件列表：\n${JSON.stringify(payload.events, null, 2)}`)
 
     sending = true
     options.api.request({
@@ -55,10 +58,10 @@ export function createSender(options: CreateSenderOptions): EventSender {
       method: 'POST',
       data: JSON.stringify(payload),
       success: () => {
-        options.log('上报成功')
+        options.log(`事件上报成功（共 ${payload.events.length} 个）`)
       },
       fail: err => {
-        options.log(`上报失败：\n${JSON.stringify(err, null, 2)}`)
+        options.log(`事件上报失败：\n${JSON.stringify(err, null, 2)}`)
       },
       complete: () => {
         sending = false
@@ -67,7 +70,7 @@ export function createSender(options: CreateSenderOptions): EventSender {
         }, 0)
       },
     })
-  }, 500)
+  }, EVENT_REPORT_FREQUENCY)
 
   return {
     enqueue: (eventName: string, eventParams: Record<string, unknown>) => {

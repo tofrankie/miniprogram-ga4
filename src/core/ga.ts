@@ -107,6 +107,8 @@ export class GA {
       getClientId: () => getClientId(api),
       log: message => this.#log(message),
     })
+
+    this.#log('初始化完成')
   }
 
   /**
@@ -351,7 +353,9 @@ export class GA {
         return
       }
 
-      this.#log(`事件 '${eventName}' 已加入队列：\n${JSON.stringify(mergedEventParams, null, 2)}`)
+      this.#log(
+        `事件 '${eventName}' 已加入发送队列：\n${JSON.stringify(mergedEventParams, null, 2)}`
+      )
       this.#sender.enqueue(eventName, mergedEventParams)
     } catch (error) {
       // 避免影响业务逻辑
