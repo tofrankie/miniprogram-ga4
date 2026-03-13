@@ -8,4 +8,4 @@
 
 > **default**: `GA`
 
-Defined in: [index.ts:5](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/index.ts#L5)
+Defined in: [index.ts:5](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/index.ts#L5)

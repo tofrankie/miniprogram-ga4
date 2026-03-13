@@ -6,7 +6,7 @@
 
 # Interface: MiniprogramAPI
 
-Defined in: [core/types.ts:18](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L18)
+Defined in: [core/types.ts:18](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L18)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [core/types.ts:18](https://github.com/tofrankie/miniprogram-ga4/blob
 
 > **getStorageSync**: (`key`) => `string`
 
-Defined in: [core/types.ts:20](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L20)
+Defined in: [core/types.ts:20](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L20)
 
 读取本地存储
 
@@ -34,7 +34,7 @@ Defined in: [core/types.ts:20](https://github.com/tofrankie/miniprogram-ga4/blob
 
 > **onAppShow**: (`callback`) => `void`
 
-Defined in: [core/types.ts:24](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L24)
+Defined in: [core/types.ts:24](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L24)
 
 监听小程序切前台
 
@@ -54,7 +54,7 @@ Defined in: [core/types.ts:24](https://github.com/tofrankie/miniprogram-ga4/blob
 
 > **request**: (`options`) => `void`
 
-Defined in: [core/types.ts:26](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L26)
+Defined in: [core/types.ts:26](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L26)
 
 发起网络请求
 
@@ -74,7 +74,7 @@ Defined in: [core/types.ts:26](https://github.com/tofrankie/miniprogram-ga4/blob
 
 > **setStorageSync**: (`key`, `value`) => `void`
 
-Defined in: [core/types.ts:22](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L22)
+Defined in: [core/types.ts:22](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L22)
 
 写入本地存储
 

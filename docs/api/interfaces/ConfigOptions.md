@@ -6,7 +6,7 @@
 
 # Interface: ConfigOptions
 
-Defined in: [core/types.ts:29](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L29)
+Defined in: [core/types.ts:29](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L29)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [core/types.ts:29](https://github.com/tofrankie/miniprogram-ga4/blob
 
 > `optional` **api**: [`MiniprogramAPI`](MiniprogramAPI.md)
 
-Defined in: [core/types.ts:35](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L35)
+Defined in: [core/types.ts:35](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L35)
 
 当前端小程序 API 命名空间（默认微信小程序的 `wx`）
 
@@ -24,7 +24,7 @@ Defined in: [core/types.ts:35](https://github.com/tofrankie/miniprogram-ga4/blob
 
 > `optional` **debug**: `boolean`
 
-Defined in: [core/types.ts:33](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L33)
+Defined in: [core/types.ts:33](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L33)
 
 开启调试日志
 
@@ -34,6 +34,6 @@ Defined in: [core/types.ts:33](https://github.com/tofrankie/miniprogram-ga4/blob
 
 > `optional` **transportUrl**: `string`
 
-Defined in: [core/types.ts:31](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L31)
+Defined in: [core/types.ts:31](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L31)
 
 数据上报域名，默认 `https://www.google-analytics.com`

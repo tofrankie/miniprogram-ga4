@@ -8,7 +8,7 @@
 
 > **PurchaseEventParams** = [`ViewItemEventParams`](ViewItemEventParams.md) & `object`
 
-Defined in: [core/types.ts:200](https://github.com/tofrankie/miniprogram-ga4/blob/bc17a21a3d2ec421903d984e5143b19e5b65d9ca/src/core/types.ts#L200)
+Defined in: [core/types.ts:200](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L200)
 
 `purchase` 事件参数
 
