@@ -1,10 +1,14 @@
 # @tofrankie/miniprogram-ga4
 
-适用于小程序的 Google Analytics 4。目前已支持：
+适用于小程序的 Google Analytics 4。
+
+目前已支持：
 
 - 微信小程序
+- uni-app 微信小程序
 
-> 理论上支持各小程序平台（包括 uniapp），但未经验证，欢迎反馈！
+> [!NOTE]
+> 理论上支持各小程序平台，但未经验证，欢迎反馈！
 
 ## 快速开始
 
@@ -561,3 +565,15 @@ ga.refund(eventParams)
 | eventParams.coupon         | string | 否    | 无     | 与事件相关的优惠券名称/代码                                                                                                                                                                                   |
 | eventParams.shipping       | number | 否    | 无     | 与交易相关的运费                                                                                                                                                                                              |
 | eventParams.tax            | number | 否    | 无     | 与交易相关的税费                                                                                                                                                                                              |
+
+## 已知问题
+
+众所周知，微信小程序对 npm 包支持不友好。在构建 npm 时，它无法识别 `dist/index.cjs` 文件，会自动追加 `.js` 变成 `dist/index.cjs.js` 文件，自然是找不到，因此会抛出错误。
+
+```
+/path/to/your-miniprogram-project/node_modules/@tofrankie/miniprogram-ga4/dist/index.cjs.js: Npm package entry file not found
+```
+
+针对该问题，本包在构建时，会自动将 `dist/index.cjs` 文件复制为 `dist/index.js` 文件，main 字段指向 `dist/index.js` 文件以解决微信开发工具构建 npm 报错问题。
+
+通常情况下，开发体验是没有问题的，因为大多数项目所使用的 Node.js 版本已支持 `exports` 条件导入字段。在编辑器也能获得完整的类型提示，使用 uni-app 等框架开发接入也是没有问题的。
