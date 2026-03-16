@@ -59,6 +59,8 @@
     "prepare": "husky"
   },
   "devDependencies": {
+    "@douyin-microapp/typings": "^1.3.1",
+    "@mini-types/alipay": "^3.0.14",
     "@tofrankie/eslint": "^0.0.14",
     "@tofrankie/prettier": "^0.0.5",
     "@types/node": "^25.5.0",

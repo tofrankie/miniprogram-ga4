@@ -1,4 +1,5 @@
 import type { MiniprogramAPI } from '@/core/types'
+import type { DeviceInfo } from '@/internal/device'
 import { throttle } from '@/internal/utils'
 
 type QueuedEvent = [eventName: string, eventParams: Record<string, unknown>]
@@ -9,11 +10,18 @@ interface CreateSenderOptions {
   apiSecret: string
   transportUrl: string
   getClientId: () => string
+  deviceInfo?: DeviceInfo
   log: (message: string, force?: boolean) => void
 }
 
 export interface EventSender {
   enqueue: (eventName: string, eventParams: Record<string, unknown>) => void
+}
+
+export interface EventPayload {
+  client_id: string
+  device?: DeviceInfo
+  events: Array<{ name: string; params: Record<string, unknown> }>
 }
 
 // 事件上报频率
@@ -31,11 +39,9 @@ export function createSender(options: CreateSenderOptions): EventSender {
       return
     }
 
-    const payload: {
-      client_id: string
-      events: Array<{ name: string; params: Record<string, unknown> }>
-    } = {
+    const payload: EventPayload = {
       client_id: options.getClientId(),
+      device: options.deviceInfo,
       events: [],
     }
 
@@ -53,6 +59,8 @@ export function createSender(options: CreateSenderOptions): EventSender {
 
     sending = true
     options.api.request({
+      // 事件验证：https://developers.google.com/analytics/devguides/collection/protocol/ga4/validating-events?hl=zh-cn&client_type=gtag#send_events_for_validation
+      // url: `${options.transportUrl}/debug/mp/collect?measurement_id=${options.measurementId}&api_secret=${options.apiSecret}`
       url: `${options.transportUrl}/mp/collect?measurement_id=${options.measurementId}&api_secret=${options.apiSecret}`,
       header: { 'content-type': 'application/json' },
       method: 'POST',

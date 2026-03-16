@@ -24,11 +24,19 @@ export interface MiniprogramAPI {
   onAppShow: (callback: () => void) => void
   /** 发起网络请求 */
   request: (options: MiniprogramRequestOptions) => void
+  /** 获取小程序基础信息（如 language、version），微信 2.20.1+ */
+  getAppBaseInfo?: () => WechatMiniprogram.AppBaseInfo
+  /** 获取窗口信息（如 screenWidth、screenHeight），微信 2.20.1+ */
+  getWindowInfo?: () => WechatMiniprogram.WindowInfo
+  /** 获取设备信息（如 brand、model、system），微信 2.20.1+ */
+  getDeviceInfo?: () => WechatMiniprogram.DeviceInfo
 }
 
 export interface ConfigOptions {
-  /** 数据上报域名，默认 `https://www.google-analytics.com` */
+  /** 数据上报域名；未指定时由 `eu` 决定：`eu: true` 为 `https://region1.google-analytics.com`，否则为 `https://www.google-analytics.com` */
   transportUrl?: string
+  /** 是否在欧盟境内收集数据；为 true 时默认使用 region1 域名 */
+  eu?: boolean
   /** 开启调试日志 */
   debug?: boolean
   /** 当前端小程序 API 命名空间（默认微信小程序的 `wx`） */

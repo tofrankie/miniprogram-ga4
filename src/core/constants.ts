@@ -11,6 +11,12 @@ export const STORAGE_KEY = {
   GA: '_ga',
 } as const
 
+/** 默认数据上报域名（非欧盟） */
+export const DEFAULT_TRANSPORT_URL = 'https://www.google-analytics.com'
+
+/** 欧盟境内数据上报域名 */
+export const EU_TRANSPORT_URL = 'https://region1.google-analytics.com' // https://developers.google.com/analytics/devguides/collection/protocol/ga4/validating-events?hl=zh-cn&client_type=gtag#send_events_for_validation
+
 /** GA4 预留事件前缀 */
 export const GA_RESERVED_PREFIX = ['google_', 'ga_', 'firebase_'] as const
 

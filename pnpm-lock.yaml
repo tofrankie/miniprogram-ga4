@@ -8,6 +8,12 @@ importers:
 
   .:
     devDependencies:
+      '@douyin-microapp/typings':
+        specifier: ^1.3.1
+        version: 1.3.1
+      '@mini-types/alipay':
+        specifier: ^3.0.14
+        version: 3.0.14
       '@tofrankie/eslint':
         specifier: ^0.0.14
         version: 0.0.14(@typescript-eslint/rule-tester@8.57.0(eslint@9.39.4)(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.0(typescript@5.9.3))(@typescript-eslint/utils@8.57.0(eslint@9.39.4)(typescript@5.9.3))(@vue/compiler-sfc@3.5.30)(eslint@9.39.4)(typescript@5.9.3)(vitest@4.1.0(@types/node@25.5.0)(vite@8.0.0(@types/node@25.5.0)(yaml@2.8.2)))
@@ -217,6 +223,9 @@ packages:
   '@clack/prompts@1.1.0':
     resolution: {integrity: sha512-pkqbPGtohJAvm4Dphs2M8xE29ggupihHdy1x84HNojZuMtFsHiUlRvqD24tM2+XmI+61LlfNceM3Wr7U5QES5g==}
 
+  '@douyin-microapp/typings@1.3.1':
+    resolution: {integrity: sha512-TuooIb1SYqMQ6FcC2Ux5wm5/2VH9hKO6bHIHxlKhcpW9fBp8FXHn7X/wfpVi0SaKNK15zA+B8JN2HSsaJ/wjUw==}
+
   '@dprint/formatter@0.5.1':
     resolution: {integrity: sha512-cdZUrm0iv/FnnY3CKE2dEcVhNEzrC551aE2h2mTFwQCRBrqyARLDnb7D+3PlXTUVp3s34ftlnGOVCmhLT9DeKA==}
 
@@ -396,6 +405,15 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@mini-types/alipay@3.0.14':
+    resolution: {integrity: sha512-FakzSsKvybtWlEIVTIRlr89kuQFn+XY86Ho9VUFFaKLplhW6Wx8FUxTDE7IzV7B9rT8DP/Icy637vUHlXPsw1g==}
+
+  '@mini-types/global@3.0.14':
+    resolution: {integrity: sha512-St2ucFRfKRskposOqV/9iNJTKn1MbyqDypQiy/0DaVJjEm2MFi82RJjX9sBz1uWhQIqzu741PgTjGSy7L/Qj9g==}
+
+  '@mini-types/my@3.0.14':
+    resolution: {integrity: sha512-aEgmM+rbEvEzTvqltCFRAg/h6KKs14M1y+FrOkz+hn2EyNpOVPesUzTjbRhSiFFsE3WdfBh54lHNYBahAmHq7w==}
 
   '@napi-rs/wasm-runtime@1.1.1':
     resolution: {integrity: sha512-p64ah1M1ld8xjWv3qbvFwHiFVWrq1yFvV4f7w+mzaqiR4IlSgkqhcRdHwsGgomwzBH51sRY4NEowLxnaBjcW/A==}
@@ -2684,6 +2702,8 @@ snapshots:
       '@clack/core': 1.1.0
       sisteransi: 1.0.5
 
+  '@douyin-microapp/typings@1.3.1': {}
+
   '@dprint/formatter@0.5.1': {}
 
   '@dprint/markdown@0.21.1': {}
@@ -2918,6 +2938,15 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@mini-types/alipay@3.0.14':
+    dependencies:
+      '@mini-types/global': 3.0.14
+      '@mini-types/my': 3.0.14
+
+  '@mini-types/global@3.0.14': {}
+
+  '@mini-types/my@3.0.14': {}
 
   '@napi-rs/wasm-runtime@1.1.1':
     dependencies:

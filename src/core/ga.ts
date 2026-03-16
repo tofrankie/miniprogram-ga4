@@ -19,9 +19,11 @@ import type {
   ViewItemEventParams,
   ViewItemListEventParams,
 } from '@/core/types'
+import type { DeviceInfo } from '@/internal/device'
 import type { EventSender } from '@/internal/sender'
 import type { SessionManager } from '@/internal/session'
-import { EVENT_NAME, LOG_LEVEL } from '@/core/constants'
+import { DEFAULT_TRANSPORT_URL, EU_TRANSPORT_URL, EVENT_NAME, LOG_LEVEL } from '@/core/constants'
+import { getDeviceInfo } from '@/internal/device'
 import { createSender } from '@/internal/sender'
 import { createSessionManager } from '@/internal/session'
 import {
@@ -68,7 +70,7 @@ export class GA {
   #api?: MiniprogramAPI
   #session?: SessionManager
   #sender?: EventSender
-
+  #deviceInfo?: DeviceInfo
   /**
    * 初始化
    * @param measurementId Measurement ID
@@ -96,15 +98,18 @@ export class GA {
     const api = assertApi(options?.api ?? getDefaultApi())
     this.#measurementId = measurementId
     this.#apiSecret = apiSecret
-    this.#transportUrl = options?.transportUrl || 'https://www.google-analytics.com'
+    const defaultTransportUrl = options?.eu ? EU_TRANSPORT_URL : DEFAULT_TRANSPORT_URL
+    this.#transportUrl = options?.transportUrl ?? defaultTransportUrl
     this.#api = api
     this.#session = createSessionManager(api)
+    this.#deviceInfo = getDeviceInfo(api)
     this.#sender = createSender({
       api,
       measurementId: this.#measurementId,
       apiSecret: this.#apiSecret,
       transportUrl: this.#transportUrl,
       getClientId: () => getClientId(api),
+      deviceInfo: this.#deviceInfo,
       log: message => this.#log(message),
     })
 
@@ -342,7 +347,7 @@ export class GA {
 
       // 必须添加 engagement_time_msec 和 session_id 参数，才能在实时等报告中显示用户活动。https://developers.google.com/analytics/devguides/collection/protocol/ga4/reference?hl=zh-cn&client_type=gtag#common_params
       const mergedEventParams: EventParams = {
-        engagement_time_msec: 1000, // 其中不传可能会导致分配到 not set 中
+        engagement_time_msec: 1000, // 若不传，可能会导致分配到 not set 中
         session_id: this.#session.currentSessionId(),
         ...eventParams,
       }
