@@ -33,7 +33,11 @@ import {
   isObj,
   isStr,
 } from '@/internal/utils'
-import { validateEventName, validateEventParams } from '@/internal/validate'
+import {
+  validateEventName,
+  validateEventParamNames,
+  validateEventParams,
+} from '@/internal/validate'
 
 const REQUIRED_API_METHODS: Array<keyof MiniprogramAPI> = [
   'getStorageSync',
@@ -345,6 +349,15 @@ export class GA {
         return
       }
 
+      // debug 下校验用户参数名称（预留名称、禁止前缀），不校验 SDK 注入的 session_id 等
+      if (this.#debugEnable) {
+        const paramNameError = validateEventParamNames(eventParams as Record<string, unknown>)
+        if (paramNameError) {
+          this.#log(paramNameError, LOG_LEVEL.ERROR, true)
+          return
+        }
+      }
+
       // 必须添加 engagement_time_msec 和 session_id 参数，才能在实时等报告中显示用户活动。https://developers.google.com/analytics/devguides/collection/protocol/ga4/reference?hl=zh-cn&client_type=gtag#common_params
       const mergedEventParams: EventParams = {
         engagement_time_msec: 1000, // 若不传，可能会导致分配到 not set 中
@@ -354,7 +367,7 @@ export class GA {
 
       const eventParamsError = validateEventParams(mergedEventParams)
       if (eventParamsError) {
-        this.#log(eventParamsError)
+        this.#log(eventParamsError, LOG_LEVEL.ERROR, true)
         return
       }
 

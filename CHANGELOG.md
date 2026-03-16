@@ -1,5 +1,10 @@
 # Changelog
 
+## miniprogram-ga4@0.0.4 (2026-03-17)
+
+- 支持设备信息上报
+- 支持预留事件参数名称校验
+
 ## miniprogram-ga4@0.0.3 (2026-03-13)
 
 - Update dependencies

@@ -1,7 +1,7 @@
 {
   "name": "@tofrankie/miniprogram-ga4",
   "type": "module",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "packageManager": "pnpm@10.32.0",
   "description": "适用于小程序的 Google Analytics 4",
   "author": "Frankie <1426203851@qq.com>",

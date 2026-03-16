@@ -46,9 +46,26 @@ export const GA_RESERVED_EVENT = [
   'user_engagement',
 ] as const
 
-// TODO:
-// https://support.google.com/analytics/answer/13316687?hl=zh-Hans&sjid=11113708651082933392-NC#zippy=%2Cweb%2C%E7%BD%91%E7%AB%99
-export const RESERVED_EVENT_PARAMS = ['']
+/** 预留的事件参数名称（不能作为自定义维度/指标使用），详见 https://support.google.com/analytics/answer/13316687 */
+export const RESERVED_EVENT_PARAMS = [
+  'cid',
+  'currency',
+  'customer_id',
+  'customerid',
+  'dclid',
+  'gclid',
+  'session_id',
+  'sessionid',
+  'sfmc_id',
+  'sid',
+  'srsltid',
+  'uid',
+  'user_id',
+  'userid',
+] as const
+
+/** 参数名称不能以下列内容开头，详见 https://support.google.com/analytics/answer/13316687 */
+export const RESERVED_PARAM_PREFIXES = ['_', 'firebase_', 'ga_', 'google_', 'gtag.'] as const
 
 /* 内置事件 */
 export const EVENT_NAME = {
