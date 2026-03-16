@@ -340,7 +340,7 @@ export class GA {
         return
       }
 
-      // 统一添加公共参数：engagement_time_msec、session_id。
+      // 必须添加 engagement_time_msec 和 session_id 参数，才能在实时等报告中显示用户活动。https://developers.google.com/analytics/devguides/collection/protocol/ga4/reference?hl=zh-cn&client_type=gtag#common_params
       const mergedEventParams: EventParams = {
         engagement_time_msec: 1000, // 其中不传可能会导致分配到 not set 中
         session_id: this.#session.currentSessionId(),

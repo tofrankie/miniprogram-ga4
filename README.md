@@ -72,7 +72,7 @@ ga.event('your_event_name', {
 
 用户与网站产生的每一个交互，都可以成为事件，它由事件名称、事件参数组成。在 GA4 中[事件类型](https://support.google.com/analytics/answer/9322688?hl=zh-Hans&ref_topic=13367566)有：自动收集的事件、增强型衡量事件、推荐事件、自定义事件，其中前两者接入 [gtag.js](https://support.google.com/analytics/answer/9304153#add-tag) 后自动收集，后两者需要手动上报。
 
-鉴于小程序特殊性，需要基于 Measurement Protocol 借助网络请求进行数据上报，**本 SDK 仅实现了部分事件**。
+鉴于小程序特殊性，需要基于 [Measurement Protocol](https://support.google.com/analytics/answer/9900444?hl=zh-Hans) 借助网络请求进行数据上报，**本 SDK 仅实现了部分事件**。
 
 ### “固执己见”的通用事件
 
@@ -107,6 +107,9 @@ ga.event('any_event_name', {
 // 上述通用的 event 事件相当于：
 // ga.event('event', { category, action, label, value })
 ```
+
+> [!IMPORTANT]
+> 若你使用 `event` 的事件设计，请尽早参考下文「[自定义事件筛选](#自定义事件筛选)」章节将 `category`、`action`、`label`、`value` 设为自定义维度，避免上报的数据无法体现在 GA 报表中。注意，自定义维度和指标是有配额限制的（[了解更多](https://support.google.com/analytics/answer/11202874?hl=zh-Hans)），这也是设计通用的 `event` 事件的原因之一。
 
 ## 页面浏览事件 page_view
 
@@ -171,6 +174,11 @@ ga.exception('这是一个严重错误', true)
 ![](./images/custom-dimension.png)
 
 GA 预留的[自定义参数](https://support.google.com/analytics/answer/13316687#zippy=web%2C%E7%BD%91%E7%AB%99)（用户属性名称）在创建自定义维度时不能使用，比如 `cid`、`uid`、`user_id` 等。因此应该避免使用预留的自定义参数名称，以免后续无法将其设为自定义维度，重构字段则会丢失此前的数据。
+
+### 相关链接
+
+- [事件收集限制](https://support.google.com/analytics/answer/9267744)
+- [自定义维度和指标简介](https://support.google.com/analytics/answer/14240153)
 
 ## APIs
 
@@ -574,6 +582,6 @@ ga.refund(eventParams)
 /path/to/your-miniprogram-project/node_modules/@tofrankie/miniprogram-ga4/dist/index.cjs.js: Npm package entry file not found
 ```
 
-针对该问题，本包在构建时，会自动将 `dist/index.cjs` 文件复制为 `dist/index.js` 文件，main 字段指向 `dist/index.js` 文件以解决微信开发工具构建 npm 报错问题。
+针对该问题，本包在构建时，会自动将 `dist/index.cjs` 文件复制为 `dist/index.js` 文件，`main` 字段指向 `dist/index.js` 文件以解决微信开发工具构建 npm 报错问题。
 
 通常情况下，开发体验是没有问题的，因为大多数项目所使用的 Node.js 版本已支持 `exports` 条件导入字段。在编辑器也能获得完整的类型提示，使用 uni-app 等框架开发接入也是没有问题的。
