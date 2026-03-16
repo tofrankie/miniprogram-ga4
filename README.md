@@ -1,5 +1,7 @@
 # @tofrankie/miniprogram-ga4
 
+[![npm version](https://img.shields.io/npm/v/@tofrankie/miniprogram-ga4)](https://www.npmjs.com/package/@tofrankie/miniprogram-ga4) [![license](https://img.shields.io/npm/l/@tofrankie/miniprogram-ga4)](https://www.npmjs.com/package/@tofrankie/miniprogram-ga4)
+
 适用于小程序的 Google Analytics 4。
 
 目前已支持：
