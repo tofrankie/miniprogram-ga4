@@ -118,6 +118,7 @@ export class GA {
     })
 
     this.#log('初始化完成')
+    this.#log(`设备信息：\n${JSON.stringify(this.#deviceInfo, null, 2)}`)
   }
 
   /**

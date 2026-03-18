@@ -60,7 +60,7 @@ export function getDeviceInfo(api: MiniprogramAPI): DeviceInfo | undefined {
   return {
     category,
     language: appBaseInfo?.language ?? '', // 微信设置的语言
-    screen_resolution: `${windowInfo?.screenWidth}x${windowInfo?.screenHeight}`,
+    screen_resolution: `${windowInfo?.screenWidth}x${windowInfo?.screenHeight}`, // 小程序无法获取物理分辨率，此处为 CSS 像素尺寸
     operating_system: osName,
     operating_system_version: osVersion,
     model: deviceInfo?.model ?? '',
