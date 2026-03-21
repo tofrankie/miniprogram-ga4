@@ -4,15 +4,21 @@
 
 # @tofrankie/miniprogram-ga4
 
-适用于小程序的 Google Analytics 4。目前已支持：
+[![npm version](https://img.shields.io/npm/v/@tofrankie/miniprogram-ga4)](https://www.npmjs.com/package/@tofrankie/miniprogram-ga4) [![license](https://img.shields.io/npm/l/@tofrankie/miniprogram-ga4)](https://www.npmjs.com/package/@tofrankie/miniprogram-ga4)
+
+适用于小程序的 Google Analytics 4。
+
+目前已支持：
 
 - 微信小程序
+- uni-app 微信小程序
 
-> 理论上支持各小程序平台（包括 uniapp），但未经验证，欢迎反馈！
+> [!NOTE]
+> 理论上支持各小程序平台，但未经验证，欢迎反馈！
 
 ## 快速开始
 
-### 引入
+### 导入
 
 使用 npm 构建
 
@@ -28,7 +34,7 @@ $ pnpm add @tofrankie/miniprogram-ga4
 4. 从 `dist` 目录下获取对应产物文件
 5. 将产物文件添加至项目中
 
-### 使用
+### 初始化与上报
 
 前往 Google Analytics 后台[创建媒体资源](https://support.google.com/analytics/answer/9304153#property)，接着拿到 [Measurement ID](https://support.google.com/analytics/answer/12270356) 和 [Sceret](https://support.google.com/analytics/answer/9814495)。
 
@@ -38,8 +44,8 @@ const ga = require('@tofrankie/miniprogram-ga4')
 
 // 在 app.js 初始化
 ga.config('your_measurement_id', 'your_api_sceret', {
-  // 用于数据转发，转发至 `https://www.google-analytics.com` 域名
-  // 参考：https://github.com/rchunping/wxapp-google-analytics/issues/4
+  // 用于数据转发，详见下方 config() 参数说明
+  // 数据转发服务器配置参考：https://github.com/rchunping/wxapp-google-analytics/issues/4
   transportUrl: 'https://analytics.example.com',
 
   // 开启调试日志，建议仅开发模式下开启
@@ -63,8 +69,13 @@ ga.event('your_event_name', {
 })
 ```
 
-> [!IMPORTANT]
-> 在设计事件名称、事件参数之前，请充分了解[事件命名规则](https://support.google.com/analytics/answer/13316687#zippy=web%2C%E7%BD%91%E7%AB%99)，避免使用 GA 预留的事件名称、事件参数名称导致后续无法将参数设为自定义维度。
+## 准备工作
+
+在生成新事件或重命名现有事件之前：
+
+- 确保新名称不是[预留名称](https://support.google.com/analytics/answer/13316687)
+- 与您的团队共同检查所做更改，以免出现事件名称重复的问题
+- 查看[事件收集限制](https://support.google.com/analytics/answer/9267744)
 
 ## 关于事件
 
@@ -72,7 +83,7 @@ ga.event('your_event_name', {
 
 用户与网站产生的每一个交互，都可以成为事件，它由事件名称、事件参数组成。在 GA4 中[事件类型](https://support.google.com/analytics/answer/9322688?hl=zh-Hans&ref_topic=13367566)有：自动收集的事件、增强型衡量事件、推荐事件、自定义事件，其中前两者接入 [gtag.js](https://support.google.com/analytics/answer/9304153#add-tag) 后自动收集，后两者需要手动上报。
 
-鉴于小程序特殊性，需要基于 Measurement Protocol 借助网络请求进行数据上报，**本 SDK 仅实现了部分事件**。
+鉴于小程序特殊性，需要基于 [Measurement Protocol](https://support.google.com/analytics/answer/9900444?hl=zh-Hans) 借助网络请求进行数据上报，**本 SDK 仅实现了部分事件**。
 
 ### “固执己见”的通用事件
 
@@ -107,6 +118,9 @@ ga.event('any_event_name', {
 // 上述通用的 event 事件相当于：
 // ga.event('event', { category, action, label, value })
 ```
+
+> [!IMPORTANT]
+> 若你使用 `event` 的事件设计，请尽早参考下文「[自定义事件筛选](#自定义事件筛选)」章节将 `category`、`action`、`label`、`value` 设为自定义维度，避免上报的数据无法体现在 GA 报表中。注意，自定义维度和指标是有配额限制的（[了解更多](https://support.google.com/analytics/answer/11202874?hl=zh-Hans)），这也是设计通用的 `event` 事件的原因之一。
 
 ## 页面浏览事件 page_view
 
@@ -172,6 +186,11 @@ ga.exception('这是一个严重错误', true)
 
 GA 预留的[自定义参数](https://support.google.com/analytics/answer/13316687#zippy=web%2C%E7%BD%91%E7%AB%99)（用户属性名称）在创建自定义维度时不能使用，比如 `cid`、`uid`、`user_id` 等。因此应该避免使用预留的自定义参数名称，以免后续无法将其设为自定义维度，重构字段则会丢失此前的数据。
 
+### 相关链接
+
+- [事件收集限制](https://support.google.com/analytics/answer/9267744)
+- [自定义维度和指标简介](https://support.google.com/analytics/answer/14240153)
+
 ## APIs
 
 目前 SDK 提供了以下方法，可覆盖常用场景，并提供良好的代码提示以方便使用。
@@ -213,19 +232,21 @@ GA 预留的[自定义参数](https://support.google.com/analytics/answer/133166
 ga.config(measurementId, apiSecret, options)
 ```
 
-| 参数                 | 类型    | 必填 | 默认值                             | 描述                                                                                         |
-| :------------------- | :------ | :--- | :--------------------------------- | :------------------------------------------------------------------------------------------- |
-| measurementId        | string  | 是   | 无                                 | Measurement ID（[更多](https://support.google.com/analytics/answer/12270356)）               |
-| apiSecret            | string  | 是   | 无                                 | Measurement Protocol API 密钥（[更多](https://support.google.com/analytics/answer/9814495)） |
-| options.transportUrl | string  | 否   | `https://www.google-analytics.com` | 数据转发服务器 URL                                                                           |
-| options.debug        | boolean | 否   | `false`                            | 开启调试日志                                                                                 |
-| options.api          | object  | 否   | `wx`                               | 小程序 API 命名空间对象；理论上支持 `my`（支付宝小程序）、`tt`（抖音小程序）等               |
+| 参数                 | 类型    | 必填 | 默认值  | 描述                                                                                         |
+| :------------------- | :------ | :--- | :------ | :------------------------------------------------------------------------------------------- |
+| measurementId        | string  | 是   | 无      | Measurement ID（[更多](https://support.google.com/analytics/answer/12270356)）               |
+| apiSecret            | string  | 是   | 无      | Measurement Protocol API 密钥（[更多](https://support.google.com/analytics/answer/9814495)） |
+| options.transportUrl | string  | 否   | 见说明  | 数据转发服务器 URL，默认使用 `https://www.google-analytics.com`                              |
+| options.eu           | boolean | 否   | `false` | 在欧盟境内收集数据时设为 `true`，默认使用 `https://region1.google-analytics.com`             |
+| options.debug        | boolean | 否   | `false` | 开启调试日志                                                                                 |
+| options.api          | object  | 否   | `wx`    | 小程序 API 命名空间对象；理论上支持 `my`（支付宝小程序）、`tt`（抖音小程序）等               |
 
 说明：
 
 1. `measurementId` 使用的是 GA4 的 Measurement ID（`G-` 开头），不是 UA 的 Tracking ID（`UA-` 开头）。
-2. 由于 `https://www.google-analytics.com` 域名未备案，因此无法添加到小程序的 request 合法域名中，加上用户可能无法访问此域名，因此需要你准备一个已备案的域名做数据转发。参考 [rchunping/wxapp-google-analytics#4](https://github.com/rchunping/wxapp-google-analytics/issues/4)
-3. 理论上 SDK 支持各平台小程序（内部使用到的 API 是通用的），可以在 `options.api` 传入如 `my`（支付宝小程序）、`tt`（抖音小程序）等，**但未经测试验证**。
+2. 默认数据上报域名为 `https://www.google-analytics.com`；若在欧盟境内收集数据，可设置 `options.eu: true`，此时默认使用 `https://region1.google-analytics.com`。若指定了 `options.transportUrl`，则优先使用该 URL。
+3. 由于上述 GA 域名未备案，因此无法添加到小程序的 request 合法域名中，因此需要你准备一个已备案的域名做数据转发。参考 [rchunping/wxapp-google-analytics#4](https://github.com/rchunping/wxapp-google-analytics/issues/4)
+4. 理论上 SDK 支持各平台小程序（内部使用到的 API 是通用的），可以在 `options.api` 传入如 `my`（支付宝小程序）、`tt`（抖音小程序）等，**但未经测试验证**。
 
 ### ga.pageView()
 
@@ -565,3 +586,15 @@ ga.refund(eventParams)
 | eventParams.coupon         | string | 否    | 无     | 与事件相关的优惠券名称/代码                                                                                                                                                                                   |
 | eventParams.shipping       | number | 否    | 无     | 与交易相关的运费                                                                                                                                                                                              |
 | eventParams.tax            | number | 否    | 无     | 与交易相关的税费                                                                                                                                                                                              |
+
+## 已知问题
+
+众所周知，微信小程序对 npm 包支持不友好。在构建 npm 时，它无法识别 `dist/index.cjs` 文件，会自动追加 `.js` 变成 `dist/index.cjs.js` 文件，自然是找不到，因此会抛出错误。
+
+```
+/path/to/your-miniprogram-project/node_modules/@tofrankie/miniprogram-ga4/dist/index.cjs.js: Npm package entry file not found
+```
+
+针对该问题，本包在构建时，会自动将 `dist/index.cjs` 文件复制为 `dist/index.js` 文件，`main` 字段指向 `dist/index.js` 文件以解决微信开发工具构建 npm 报错问题。
+
+通常情况下，开发体验是没有问题的，因为大多数项目所使用的 Node.js 版本已支持 `exports` 条件导入字段。在编辑器也能获得完整的类型提示，使用 uni-app 等框架开发接入也是没有问题的。

@@ -7,4 +7,3 @@ dist
 .eslintcache
 .husky/_/
 *.tsbuildinfo
-**local.*

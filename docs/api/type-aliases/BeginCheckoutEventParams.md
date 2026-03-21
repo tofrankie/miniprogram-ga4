@@ -8,7 +8,7 @@
 
 > **BeginCheckoutEventParams** = [`ViewItemEventParams`](ViewItemEventParams.md) & `object`
 
-Defined in: [core/types.ts:176](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L176)
+Defined in: [core/types.ts:184](https://github.com/tofrankie/miniprogram-ga4/blob/e79503b17c884cdf60d1be624a91bd63b2c39c4c/src/core/types.ts#L184)
 
 `begin_checkout` 事件参数
 
@@ -16,6 +16,6 @@ Defined in: [core/types.ts:176](https://github.com/tofrankie/miniprogram-ga4/blo
 
 ### coupon?
 
-> `optional` **coupon**: `string`
+> `optional` **coupon?**: `string`
 
 优惠券名称或代码

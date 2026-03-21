@@ -6,7 +6,7 @@
 
 # Interface: CommonEventParams
 
-Defined in: [core/types.ts:89](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L89)
+Defined in: [core/types.ts:97](https://github.com/tofrankie/miniprogram-ga4/blob/e79503b17c884cdf60d1be624a91bd63b2c39c4c/src/core/types.ts#L97)
 
 通用 `event` 事件参数
 
@@ -16,7 +16,7 @@ Defined in: [core/types.ts:89](https://github.com/tofrankie/miniprogram-ga4/blob
 
 ## Indexable
 
-\[`key`: `string`\]: `unknown`
+> \[`key`: `string`\]: `unknown`
 
 ## Properties
 
@@ -24,7 +24,7 @@ Defined in: [core/types.ts:89](https://github.com/tofrankie/miniprogram-ga4/blob
 
 > **action**: `string`
 
-Defined in: [core/types.ts:93](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L93)
+Defined in: [core/types.ts:101](https://github.com/tofrankie/miniprogram-ga4/blob/e79503b17c884cdf60d1be624a91bd63b2c39c4c/src/core/types.ts#L101)
 
 事件操作，常以事件目标 + 操作组成
 
@@ -34,7 +34,7 @@ Defined in: [core/types.ts:93](https://github.com/tofrankie/miniprogram-ga4/blob
 
 > **category**: `string`
 
-Defined in: [core/types.ts:91](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L91)
+Defined in: [core/types.ts:99](https://github.com/tofrankie/miniprogram-ga4/blob/e79503b17c884cdf60d1be624a91bd63b2c39c4c/src/core/types.ts#L99)
 
 事件类别，常以页面为单位
 
@@ -42,9 +42,9 @@ Defined in: [core/types.ts:91](https://github.com/tofrankie/miniprogram-ga4/blob
 
 ### label?
 
-> `optional` **label**: `string`
+> `optional` **label?**: `string`
 
-Defined in: [core/types.ts:95](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L95)
+Defined in: [core/types.ts:103](https://github.com/tofrankie/miniprogram-ga4/blob/e79503b17c884cdf60d1be624a91bd63b2c39c4c/src/core/types.ts#L103)
 
 事件标签，通常用于更具体地描述事件目标
 
@@ -52,8 +52,8 @@ Defined in: [core/types.ts:95](https://github.com/tofrankie/miniprogram-ga4/blob
 
 ### value?
 
-> `optional` **value**: `number`
+> `optional` **value?**: `number`
 
-Defined in: [core/types.ts:97](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L97)
+Defined in: [core/types.ts:105](https://github.com/tofrankie/miniprogram-ga4/blob/e79503b17c884cdf60d1be624a91bd63b2c39c4c/src/core/types.ts#L105)
 
 事件值，可用于时长、数量等

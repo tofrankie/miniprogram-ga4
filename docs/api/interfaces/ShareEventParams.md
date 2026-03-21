@@ -6,7 +6,7 @@
 
 # Interface: ShareEventParams
 
-Defined in: [core/types.ts:159](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L159)
+Defined in: [core/types.ts:167](https://github.com/tofrankie/miniprogram-ga4/blob/e79503b17c884cdf60d1be624a91bd63b2c39c4c/src/core/types.ts#L167)
 
 `share` 事件参数
 
@@ -16,15 +16,15 @@ Defined in: [core/types.ts:159](https://github.com/tofrankie/miniprogram-ga4/blo
 
 ## Indexable
 
-\[`key`: `string`\]: `unknown`
+> \[`key`: `string`\]: `unknown`
 
 ## Properties
 
 ### content\_type?
 
-> `optional` **content\_type**: `string`
+> `optional` **content\_type?**: `string`
 
-Defined in: [core/types.ts:163](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L163)
+Defined in: [core/types.ts:171](https://github.com/tofrankie/miniprogram-ga4/blob/e79503b17c884cdf60d1be624a91bd63b2c39c4c/src/core/types.ts#L171)
 
 被分享内容的类型
 
@@ -32,9 +32,9 @@ Defined in: [core/types.ts:163](https://github.com/tofrankie/miniprogram-ga4/blo
 
 ### item\_id?
 
-> `optional` **item\_id**: `string`
+> `optional` **item\_id?**: `string`
 
-Defined in: [core/types.ts:165](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L165)
+Defined in: [core/types.ts:173](https://github.com/tofrankie/miniprogram-ga4/blob/e79503b17c884cdf60d1be624a91bd63b2c39c4c/src/core/types.ts#L173)
 
 被分享内容的 ID
 
@@ -44,6 +44,6 @@ Defined in: [core/types.ts:165](https://github.com/tofrankie/miniprogram-ga4/blo
 
 > **method**: `string`
 
-Defined in: [core/types.ts:161](https://github.com/tofrankie/miniprogram-ga4/blob/23e7d8e09b772eda133dae5d976405a019e58f8a/src/core/types.ts#L161)
+Defined in: [core/types.ts:169](https://github.com/tofrankie/miniprogram-ga4/blob/e79503b17c884cdf60d1be624a91bd63b2c39c4c/src/core/types.ts#L169)
 
 分享方式，如 `Twitter`、`Wechat`
