@@ -26,25 +26,10 @@ import { DEFAULT_TRANSPORT_URL, EU_TRANSPORT_URL, EVENT_NAME, LOG_LEVEL } from '
 import { getDeviceInfo } from '@/internal/device'
 import { createSender } from '@/internal/sender'
 import { createSessionManager } from '@/internal/session'
-import {
-  formatMiniprogramPath,
-  getClientId,
-  getMiniprogramCurrentPath,
-  isObj,
-  isStr,
-} from '@/internal/utils'
-import {
-  validateEventName,
-  validateEventParamNames,
-  validateEventParams,
-} from '@/internal/validate'
+import { formatMiniprogramPath, getClientId, getMiniprogramCurrentPath, isObj, isStr } from '@/internal/utils'
+import { validateEventName, validateEventParamNames, validateEventParams } from '@/internal/validate'
 
-const REQUIRED_API_METHODS: Array<keyof MiniprogramAPI> = [
-  'getStorageSync',
-  'setStorageSync',
-  'onAppShow',
-  'request',
-]
+const REQUIRED_API_METHODS: Array<keyof MiniprogramAPI> = ['getStorageSync', 'setStorageSync', 'onAppShow', 'request']
 
 function getDefaultApi(): MiniprogramAPI | undefined {
   if (typeof wx === 'object' && wx != null) return wx as unknown as MiniprogramAPI
@@ -91,11 +76,7 @@ export class GA {
     }
 
     if (measurementId.startsWith('UA-')) {
-      this.#log(
-        `${measurementId} 是 UA 的 Tracking ID，不是 GA4 的 Measurement ID。`,
-        LOG_LEVEL.ERROR,
-        true
-      )
+      this.#log(`${measurementId} 是 UA 的 Tracking ID，不是 GA4 的 Measurement ID。`, LOG_LEVEL.ERROR, true)
       return
     }
 
@@ -130,12 +111,7 @@ export class GA {
    */
   event(category: string, action: string, label?: string, value?: number): void
   event(eventName: string, eventParams: EventParams): void
-  event(
-    categoryOrEventName: string,
-    actionOrEventParams: string | EventParams,
-    label?: string,
-    value?: number
-  ): void {
+  event(categoryOrEventName: string, actionOrEventParams: string | EventParams, label?: string, value?: number): void {
     if (!categoryOrEventName || !actionOrEventParams) {
       this.#log('categoryOrEventName 和 actionOrEventParams 为必填项。')
       return
@@ -372,9 +348,7 @@ export class GA {
         return
       }
 
-      this.#log(
-        `事件 '${eventName}' 已加入发送队列：\n${JSON.stringify(mergedEventParams, null, 2)}`
-      )
+      this.#log(`事件 '${eventName}' 已加入发送队列：\n${JSON.stringify(mergedEventParams, null, 2)}`)
       this.#sender.enqueue(eventName, mergedEventParams)
     } catch (error) {
       // 避免影响业务逻辑
