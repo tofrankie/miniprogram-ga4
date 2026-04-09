@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { validateEventName, validateEventParamNames, validateEventParams } from '@/internal/validate'
+import {
+  validateEventName,
+  validateEventParamNames,
+  validateEventParams,
+} from '@/internal/validate'
 
 const DOC_URL = 'https://support.google.com/analytics/answer/13316687'
 

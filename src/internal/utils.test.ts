@@ -43,8 +43,12 @@ describe('internal/utils', () => {
   })
 
   it('formatMiniprogramPath works', () => {
-    expect(formatMiniprogramPath('pages/home/index')).toBe('https://miniprogram.com/pages/home/index')
-    expect(formatMiniprogramPath('/pages/home/index')).toBe('https://miniprogram.com/pages/home/index')
+    expect(formatMiniprogramPath('pages/home/index')).toBe(
+      'https://miniprogram.com/pages/home/index'
+    )
+    expect(formatMiniprogramPath('/pages/home/index')).toBe(
+      'https://miniprogram.com/pages/home/index'
+    )
     expect(formatMiniprogramPath('https://example.com/p')).toBe('https://example.com/p')
     expect(formatMiniprogramPath('a'.repeat(600)).length).toBe(419)
   })
