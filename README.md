@@ -10,54 +10,65 @@
 - uni-app 微信小程序
 
 > [!NOTE]
-> 理论上支持各小程序平台，但未经验证，欢迎反馈！
+> 理论上支持各小程序平台，其他平台未经验证，欢迎反馈！
 
 ## 快速开始
 
 ### 导入
 
-使用 npm 构建
+npm 构建：
 
 ```bash
 $ pnpm add @tofrankie/miniprogram-ga4
 ```
 
-使用文件版
+文件版：
 
 1. 克隆仓库：`git clone https://github.com/tofrankie/miniprogram-ga4.git`
 2. 安装依赖：`pnpm install`
 3. 构建产物：`pnpm build`
-4. 从 `dist` 目录下获取对应产物文件
-5. 将产物文件添加至项目中
+4. 从 `dist` 目录获取对应产物文件
+5. 将产物文件拷贝至项目
 
-### 初始化与上报
+### 初始化
 
-前往 Google Analytics 后台[创建媒体资源](https://support.google.com/analytics/answer/9304153#property)，接着拿到 [Measurement ID](https://support.google.com/analytics/answer/12270356) 和 [Sceret](https://support.google.com/analytics/answer/9814495)。
+前往 Google Analytics 后台[创建媒体资源](https://support.google.com/analytics/answer/9304153#property)，拿到 [Measurement ID](https://support.google.com/analytics/answer/12270356) 和 [Sceret](https://support.google.com/analytics/answer/9814495)。
 
 ```js
+// app.js
+
 const ga = require('@tofrankie/miniprogram-ga4')
 // const ga = require('path/to/your-ga-sdk.js') // 文件版
 
-// 在 app.js 初始化
-ga.config('your_measurement_id', 'your_api_sceret', {
-  // 用于数据转发，详见下方 config() 参数说明
-  // 数据转发服务器配置参考：https://github.com/rchunping/wxapp-google-analytics/issues/4
-  transportUrl: 'https://analytics.example.com',
+App({
+  onLaunch() {
+    ga.config('your_measurement_id', 'your_api_sceret', {
+      // 用于数据转发，详见下方 config() 参数说明
+      // 数据转发服务器配置参考：https://github.com/rchunping/wxapp-google-analytics/issues/4
+      transportUrl: 'https://analytics.example.com',
 
-  // 开启调试日志，建议仅开发模式下开启
-  debug: true,
+      // 开启调试日志，建议仅开发模式下开启
+      debug: true,
 
-  // 默认为微信小程序，通过此选项可指定其他小程序平台（其他平台未经测试）
-  // api: my, // tt, uni, Taro, ...
+      // 默认为微信小程序，通过此选项可指定其他小程序平台（其他平台未经测试）
+      // api: my, // tt, uni, Taro, ...
+    })
+  },
 })
+```
 
-// 上报页面浏览事件（体现在 GA 后台的网页和屏幕）
+### 事件上报
+
+```js
+const ga = require('@tofrankie/miniprogram-ga4')
+
+// 1️⃣ 上报页面浏览事件（体现在 GA 后台的网页和屏幕）
 ga.pageView('首页', 'pages/index/index')
 
-// 上报通用的 event 事件
+// 2️⃣ 上报通用的 event 事件
 ga.event('your_category', 'your_action', 'your_label', 'your_value')
 
-// 上报任意事件
+// 3️⃣ 上报任意事件
 ga.event('your_event_name', {
   your_event_param1: 'xxx',
   your_event_param2: 'xxx',
@@ -70,7 +81,7 @@ ga.event('your_event_name', {
 在生成新事件或重命名现有事件之前：
 
 - 确保新名称不是[预留名称](https://support.google.com/analytics/answer/13316687)
-- 与您的团队共同检查所做更改，以免出现事件名称重复的问题
+- 与你的团队共同检查所做更改，以免出现事件名称重复的问题
 - 查看[事件收集限制](https://support.google.com/analytics/answer/9267744)
 
 ## 关于事件
@@ -79,15 +90,18 @@ ga.event('your_event_name', {
 
 用户与网站产生的每一个交互，都可以成为事件，它由事件名称、事件参数组成。在 GA4 中[事件类型](https://support.google.com/analytics/answer/9322688?hl=zh-Hans&ref_topic=13367566)有：自动收集的事件、增强型衡量事件、推荐事件、自定义事件，其中前两者接入 [gtag.js](https://support.google.com/analytics/answer/9304153#add-tag) 后自动收集，后两者需要手动上报。
 
-鉴于小程序特殊性，需要基于 [Measurement Protocol](https://support.google.com/analytics/answer/9900444?hl=zh-Hans) 借助网络请求进行数据上报，**本 SDK 仅实现了部分事件**。
+鉴于小程序的特殊形态，它无法使用 gtag.js，需要基于 [Measurement Protocol](https://support.google.com/analytics/answer/9900444?hl=zh-Hans) 借助网络请求进行数据上报。
 
-### “固执己见”的通用事件
+> [!IMPORTANT]
+> 本 SDK 仅实现了 gtag.js 完整能力的部分。
+
+### 固执己见的通用事件
 
 > [!NOTE]
-> 出于实际情况考虑，事件埋点通常是随着业务变化而变化的。多数小程序迭代频率非常高，非常容易产生“过时/废弃”的事件，而且命名是一件非常令人头疼的事情，**因此本 SDK 主张将绝大部分事件归入名为 `event` 的通用事件**。它是一个 opinionated 的事件设计，如果它不满足你的需求，仍然可以通过不同参数形式上报任意事件名称的事件。
+> 基于实际考虑，事件埋点通常会随着业务迭代而变化，很容易产生“过时/废弃”的事件，加之为事件命名本身是一件令人头疼的事情，**因此本 SDK 主张将绝大部分事件归入名为 `event` 的通用事件**，如点击页面跳转、点击登录、点击视频播放、支付结果等。如果这个设计不满足你的业务需求，仍然可以通过不同参数形式上报任意事件名称的事件，还可以基于它做一个简单的二次封装。
 
 ```js
-// 形式（事件名称为 `event`）
+// 通用事件上报（事件名称为 `event`）
 ga.event('category', 'action', 'label', 'value')
 
 // 示例
@@ -96,9 +110,9 @@ ga.event('设置页', '点击-切换开关', '开/关')
 ga.event('设备列表页', '点击-设备详情', '设备名称')
 ```
 
-- `category`: 事件的类型，常以页面为单位
-- `action`: 事件的操作，常以事件目标+操作组成
-- `label`: 事件的标签，通常是事件目标更具体的描述
+- `category`: 事件的类型，常以**页面**为单位
+- `action`: 事件的操作，常以**事件目标+操作**组成
+- `label`: 事件的标签，通常是**事件目标更具体的描述**
 - `value`: 事件的值，不作限制，可以是时间、数量等
 
 你仍然可以通过 `ga.event()` 上报任意事件名称的事件。
@@ -116,25 +130,26 @@ ga.event('any_event_name', {
 ```
 
 > [!IMPORTANT]
-> 若你使用 `event` 的事件设计，请尽早参考下文「[自定义事件筛选](#自定义事件筛选)」章节将 `category`、`action`、`label`、`value` 设为自定义维度，避免上报的数据无法体现在 GA 报表中。注意，自定义维度和指标是有配额限制的（[了解更多](https://support.google.com/analytics/answer/11202874?hl=zh-Hans)），这也是设计通用的 `event` 事件的原因之一。
+> 若你使用通用事件的设计，应尽早参考下文「[自定义事件筛选](#自定义事件筛选)」章节将 `category`、`action`、`label`、`value` 设为自定义维度，避免上报的数据无法体现在 GA 报表中。注意，自定义维度和指标是有配额限制的（[了解更多](https://support.google.com/analytics/answer/11202874?hl=zh-Hans)），这也是设计通用事件 `event` 的原因之一。
 
 ## 页面浏览事件 page_view
 
-由于小程序路径不同于标准的 Web 页面，为了让 GA 后台可以正确识别，SDK 内部会将小程序路径 `pages/index/index` 转换为标准的 URL 形式：`https://miniprogram.com/pages/index/index` 的形式。
+page_view 事件体现在 GA 后台的网页和屏幕。
 
-这样做的目的是让 GA 统计数据时可以正确识别我们的小程序路径（体现在 GA 后台的网页和屏幕），仅此而已。其中 `https://miniprogram.com/` 只是 SDK 内部固定前缀，理论上任意域名均可。
+由于小程序路径不同于标准的 Web 页面 URL，为了让 GA 后台报表可以正确识别小程序路径，SDK 内部在数据上报时会将小程序路径 `pages/index/index` 转换为：`https://miniprogram.com/pages/index/index` 形式。其中 `https://miniprogram.com/` 只是 SDK 内部固定前缀，理论上任意域名均可。在后台报表中基于「网页路径和屏幕类」纬度筛选，即可看到小程序路径的统计数据。
 
 ```js
 // 形式
 ga.pageView('页面标题', '页面路径', '来源页面路径')
 
-// 示例
+// 示例（在 Page onLoad 中上报）
 ga.pageView('首页') // 自动获取当前路径
 ga.pageView('首页', 'pages/index/index') // 指定路径
 ga.pageView('设置页', 'pages/setting/setting', 'pages/mine/mine') // 指定当前路径以及来源路径
 ```
 
-对于页面浏览事件，我们可以通过一些 Hack 方式自动上报。比如，原生微信小程序可以考虑使用文档中未提及但实际可用的 `wx.onAppRoute` 事件，它可以捕获到 Navigation API 或手势操作等引起的路由变化，从而上报页面浏览事件。**由于 `wx.onAppRoute` 为非公开 API，不排除后续版本会移除，请谨慎使用，后果自负！**。
+> [!NOTE]
+> 对于页面浏览事件，我们可以通过一些 Hack 方式自动上报。比如，原生微信小程序可以考虑使用文档中未提及但实际可用的 `wx.onAppRoute` 事件，它可以捕获到 Navigation API 或手势操作等引起的路由变化。**由于 `wx.onAppRoute` 是非公开 API，不排除后续小程序官方会将其移除，请谨慎使用！此处仅提供一种思路，自行承担后果！**
 
 示例：
 
@@ -156,6 +171,8 @@ App({
 ```
 
 ### 异常事件
+
+异常在软件工程领域是很常见的，本 SDK 将其抽象为 `exception` 事件。
 
 ```js
 // 形式
@@ -239,10 +256,9 @@ ga.config(measurementId, apiSecret, options)
 
 说明：
 
-1. `measurementId` 使用的是 GA4 的 Measurement ID（`G-` 开头），不是 UA 的 Tracking ID（`UA-` 开头）。
-2. 默认数据上报域名为 `https://www.google-analytics.com`；若在欧盟境内收集数据，可设置 `options.eu: true`，此时默认使用 `https://region1.google-analytics.com`。若指定了 `options.transportUrl`，则优先使用该 URL。
-3. 由于上述 GA 域名未备案，因此无法添加到小程序的 request 合法域名中，因此需要你准备一个已备案的域名做数据转发。参考 [rchunping/wxapp-google-analytics#4](https://github.com/rchunping/wxapp-google-analytics/issues/4)
-4. 理论上 SDK 支持各平台小程序（内部使用到的 API 是通用的），可以在 `options.api` 传入如 `my`（支付宝小程序）、`tt`（抖音小程序）等，**但未经测试验证**。
+1. GA4 默认数据上报域名为 `https://www.google-analytics.com`。若在欧盟境内收集数据，应设置 `options.eu: true`，上报到 `https://region1.google-analytics.com`。
+2. 由于上述 GA 域名在国内均未完成备案，因此无法添加到小程序的 request 合法域名中，因此需要你准备一个已备案的域名做数据转发，并配置 `options.transportUrl` 覆盖默认域名。参考 [rchunping/wxapp-google-analytics#4](https://github.com/rchunping/wxapp-google-analytics/issues/4)
+3. 理论上本 SDK 支持各平台小程序（内部使用到的 API 是各小程序平台通用的），可以在 `options.api` 传入如 `my`（支付宝小程序）、`tt`（抖音小程序）等，**但未经测试验证**。
 
 ### ga.pageView()
 

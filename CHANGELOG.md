@@ -1,5 +1,9 @@
 # Changelog
 
+## miniprogram-ga4@0.0.6 (2026-04-18)
+
+- 更新文档
+
 ## miniprogram-ga4@0.0.5 (2026-03-18)
 
 - 开启日志调试时打印设备信息
