@@ -1,6 +1,6 @@
 # @tofrankie/miniprogram-ga4
 
-[![npm version](https://img.shields.io/npm/v/@tofrankie/miniprogram-ga4)](https://www.npmjs.com/package/@tofrankie/miniprogram-ga4) [![license](https://img.shields.io/npm/l/@tofrankie/miniprogram-ga4)](https://www.npmjs.com/package/@tofrankie/miniprogram-ga4)
+[![npm version](https://img.shields.io/npm/v/@tofrankie/miniprogram-ga4)](https://www.npmjs.com/package/@tofrankie/miniprogram-ga4) [![npm package license](https://img.shields.io/npm/l/@tofrankie/miniprogram-ga4)](https://github.com/tofrankie/miniprogram-ga4/blob/main/LICENSE) [![npm last update](https://img.shields.io/npm/last-update/@tofrankie/miniprogram-ga4)](https://www.npmjs.com/package/@tofrankie/miniprogram-ga4)
 
 适用于小程序的 Google Analytics 4。
 
